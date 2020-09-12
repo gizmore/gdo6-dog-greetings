@@ -13,7 +13,9 @@ final class Show extends DOG_Command
     
     public function dogExecute(DOG_Message $message)
     {
-        
+        $set = DOG_Command::byTrigger('set_greeting');
+        $greeting = $set->getConfigValueRoom($message->room, 'greetings_text', null);
+        $message->rply('msg_dog_greeting_show', [$message->room->getName(), $greeting]);
     }
     
 }

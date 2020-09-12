@@ -39,7 +39,7 @@ final class Set extends DOG_Command
     
     public function dogExecute(DOG_Message $message, $text)
     {
-        $this->setConfigRoom($message->room, 'greetings_text', $text);
+        $this->setConfigValueRoom($message->room, 'greetings_text', $text);
         return $message->rply('msg_dog_greeting_set', [$text]);
     }
     
@@ -51,11 +51,14 @@ final class Set extends DOG_Command
      */
     public function dog_join(DOG_Server $server, DOG_User $user, DOG_Room $room)
     {
-        if (!$this->getConfigValueUser($user, 'greetings_done'))
+        if ($text = $this->getConfigVarRoom($room, 'greetings_text'))
         {
-            $greetingText = sprintf('%s: %s', $user->getName(), $this->getConfigVarRoom($room, 'greetings_text'));
-            $server->getConnector()->sendTo($room->getName(), $greetingText);
-            $this->setConfigValueUser($user, 'greetings_done', true);
+            if (!$this->getConfigValueUser($user, 'greetings_done'))
+            {
+                $greetingText = sprintf('%s: %s', $user->getName(), $text);
+                $server->getConnector()->sendToRoom($room, $greetingText);
+                $this->setConfigValueUser($user, 'greetings_done', true);
+            }
         }
     }
 
