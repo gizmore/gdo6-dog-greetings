@@ -40,7 +40,7 @@ final class Set extends DOG_Command
     public function dogExecute(DOG_Message $message, $text)
     {
         $this->setConfigValueRoom($message->room, 'greetings_text', $text);
-        return $message->rply('msg_dog_greeting_set', [$text]);
+        return $message->rply('msg_dog_greeting_set', [$message->room->getName(), $text]);
     }
     
     /**

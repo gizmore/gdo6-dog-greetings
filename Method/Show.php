@@ -7,7 +7,7 @@ use GDO\Dog\DOG_Message;
 final class Show extends DOG_Command
 {
     public $group = "Greetings";
-    public $trigger = "greeting show";
+    public $trigger = "show_greeting";
     
     public function isPrivateMethod() { return false; }
     
