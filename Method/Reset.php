@@ -18,7 +18,7 @@ final class Reset extends DOG_Command
         /** @var \GDO\DogGreetings\Method\Set $set **/
         $set = DOG_Command::byTrigger('set_greeting');
         $cmd = GDO::escapeS(get_class($set));
-        DOG_ConfigRoom::table()->deleteWhere("confr_command=$cmd AND confr_key='greetings_text'")->exec();
+        DOG_ConfigRoom::table()->deleteWhere("confr_command=$cmd AND confr_key='greetings_text'");
         DOG_ConfigRoom::table()->clearCache();
         $message->rply('msg_dog_greeting_reset', [$message->room->getName()]);
     }
