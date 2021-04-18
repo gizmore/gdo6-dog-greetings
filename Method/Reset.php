@@ -9,7 +9,7 @@ use GDO\Core\GDO;
 final class Reset extends DOG_Command
 {
     public $group = "Greetings";
-    public $trigger = "reset_greeting";
+    public $trigger = "reset";
     
     public function isPrivateMethod() { return false; }
     
