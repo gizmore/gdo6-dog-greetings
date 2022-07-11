@@ -3,7 +3,7 @@ namespace GDO\DogGreetings\Method;
 
 use GDO\Dog\DOG_Command;
 use GDO\Dog\GDT_DogString;
-use GDO\DB\GDT_Checkbox;
+use GDO\Core\GDT_Checkbox;
 use GDO\Dog\DOG_Message;
 use GDO\Dog\DOG_Server;
 use GDO\Dog\DOG_User;
@@ -30,7 +30,7 @@ final class Set extends DOG_Command
         );
     }
     
-    public function gdoParameters()
+    public function gdoParameters() : array
     {
         return array(
             GDT_DogString::make('text')->notNull(),
