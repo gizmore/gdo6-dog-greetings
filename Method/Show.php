@@ -10,7 +10,7 @@ final class Show extends DOG_Command
 	public $group = 'Greetings';
 	public $trigger = 'show_greeting';
 
-	public function isPrivateMethod() { return false; }
+	protected function isPrivateMethod(): bool { return false; }
 
 	public function dogExecute(DOG_Message $message)
 	{

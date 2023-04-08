@@ -15,7 +15,7 @@ final class Set extends DOG_Command
 	public $group = 'Greetings';
 	public $trigger = 'set_greeting';
 
-	public function isPrivateMethod() { return false; }
+	protected function isPrivateMethod(): bool { return false; }
 
 	public function getConfigUser()
 	{
@@ -24,7 +24,7 @@ final class Set extends DOG_Command
 		];
 	}
 
-	public function getConfigRoom()
+	protected function getConfigRoom(): array
 	{
 		return [
 			GDT_DogString::make('greetings_text')->notNull(),

@@ -12,7 +12,7 @@ final class Reset extends DOG_Command
 	public $group = 'Greetings';
 	public $trigger = 'reset';
 
-	public function isPrivateMethod() { return false; }
+	protected function isPrivateMethod(): bool { return false; }
 
 	public function dogExecute(DOG_Message $message)
 	{
