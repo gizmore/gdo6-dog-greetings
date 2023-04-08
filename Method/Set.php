@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace GDO\DogGreetings\Method;
 
 use GDO\Core\GDT_Checkbox;
@@ -9,15 +10,15 @@ use GDO\Dog\DOG_Server;
 use GDO\Dog\DOG_User;
 use GDO\Dog\GDT_DogString;
 
+/**
+ * Set a greeting message for a channel.
+ */
 final class Set extends DOG_Command
 {
 
-	public $group = 'Greetings';
-	public $trigger = 'set_greeting';
-
 	protected function isPrivateMethod(): bool { return false; }
 
-	public function getConfigUser()
+	public function getConfigUser(): array
 	{
 		return [
 			GDT_Checkbox::make('greetings_done')->initial('0'),
@@ -38,7 +39,7 @@ final class Set extends DOG_Command
 		];
 	}
 
-	public function dogExecute(DOG_Message $message, $text)
+	public function dogExecute(DOG_Message $message, $text): bool
 	{
 		$this->setConfigValueRoom($message->room, 'greetings_text', $text);
 		return $message->rply('msg_dog_greeting_set', [$message->room->getName(), $text]);
@@ -46,12 +47,8 @@ final class Set extends DOG_Command
 
 	/**
 	 * Hook dog join event to greet a user.
-	 *
-	 * @param DOG_Server $server
-	 * @param DOG_User $user
-	 * @param DOG_Room $room
 	 */
-	public function dog_join(DOG_Server $server, DOG_User $user, DOG_Room $room)
+	public function dog_join(DOG_Server $server, DOG_User $user, DOG_Room $room): void
 	{
 		if ($text = $this->getConfigVarRoom($room, 'greetings_text'))
 		{
